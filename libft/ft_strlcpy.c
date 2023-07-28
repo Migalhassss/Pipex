@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:20:08 by micarrel          #+#    #+#             */
-/*   Updated: 2022/11/09 11:38:39 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/07/28 09:50:08 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ size_t	ft_strlcpy(char *str1, char const *str2, size_t size)
 	{
 		while (str2[x] != '\0' && x < size - 1)
 		{
-		str1[x] = str2[x];
-		x++;
+			str1[x] = str2[x];
+			x++;
 		}
 		str1[x] = '\0';
 	}

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
@@ -31,7 +30,7 @@
 void	fork_process(char *av, char **envp);
 void	here_doc(char *limiter, int ac);
 char	*path_find(char *cmd, char **evnp);
-void	execute(char 	*av, char **envp);
+void	execute(char *av, char **envp);
 int		open_file(char *av, int i);
 void	ft_error(char *msg);
 

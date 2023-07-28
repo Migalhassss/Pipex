@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "pipex_bonus.h"
 
 void	fork_process(char *av, char **envp)
@@ -38,6 +36,27 @@ void	fork_process(char *av, char **envp)
 	}
 }
 
+char	*line2(int *fd, char *line)
+{
+	write(fd[1], line, ft_strlen(line));
+	free(line);
+	line = get_next_line(0);
+	return (line);
+}
+
+void	aux2(int *fd, char *line, char *limiter)
+{
+	while (line)
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		{
+			free(line);
+			exit(0);
+		}
+		line = line2(fd, line);
+	}
+}
+
 void	here_doc(char *limiter, int ac)
 {
 	pid_t	id;
@@ -45,26 +64,14 @@ void	here_doc(char *limiter, int ac)
 	char	*line;
 
 	line = NULL;
-	if (ac < 6)
+	if (ac < 6 || pipe(fd) == -1)
 		ft_error("Error\n");
-	if (pipe(fd) == -1)
-		ft_error("Error creating pipe (here_doc)\n");
 	id = fork();
 	if (id == 0)
 	{
 		close(fd[0]);
 		line = get_next_line(0);
-		while (line)
-		{
-			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-			{
-				exit(0);
-				free(line);
-			}
-			write(fd[1], line, ft_strlen(line));
-			free(line);
-			line = get_next_line(0);
-		}
+		aux2(fd, line, limiter);
 	}
 	else
 	{
@@ -74,7 +81,7 @@ void	here_doc(char *limiter, int ac)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	int	i;
 	int	filein;
@@ -100,6 +107,5 @@ int main(int ac, char **av, char **envp)
 		dup2(fileout, STDOUT_FILENO);
 		execute (av[ac - 2], envp);
 	}
-	else
-		ft_printf("Error in arguments\n");
+	ft_printf("Error arguments\n");
 }

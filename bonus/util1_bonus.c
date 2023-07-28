@@ -10,13 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "pipex_bonus.h"
+
+void	free_paths(char **paths)
+{
+	int	i;
+
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+}
 
 char	*path_find(char *cmd, char **evnp)
 {
-	int	i;
+	int		i;
 	char	**paths;
 	char	*path;
 	char	*part_path;
@@ -38,16 +46,13 @@ char	*path_find(char *cmd, char **evnp)
 		free(path);
 		i++;
 	}
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free (paths);
+	free_paths(paths);
 	return (0);
 }
 
-void	execute(char 	*av, char **envp)
+void	execute(char *av, char **envp)
 {
-	int	i;
+	int		i;
 	char	*path;
 	char	**cmd;
 

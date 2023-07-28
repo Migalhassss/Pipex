@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/28 09:57:25 by micarrel          #+#    #+#             */
+/*   Updated: 2023/07/28 09:57:25 by micarrel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	ft_error(char *msg)
@@ -32,9 +44,9 @@ void	main_process(char **av, char **envp, int *fd)
 	execute(av[3], envp);
 }
 
-int main (int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	int	fd[2];
+	int		fd[2];
 	pid_t	id;
 
 	if (ac == 5)
@@ -51,5 +63,5 @@ int main (int ac, char **av, char **envp)
 	}
 	else
 		ft_printf("Error in arguments\n");
-	// Ex: ./pipex file1 cmd1 cmd2 file2
 }
+// Ex: ./pipex file1 cmd1 cmd2 file2
