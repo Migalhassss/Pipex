@@ -20,7 +20,7 @@ OBJS	=	$(FILES:.c=.o)
 
 RM	= rm -f
 
-CC	= gcc
+CC	= cc
 
 CFLAGS	= -Wall -Wextra -Werror -I.
 

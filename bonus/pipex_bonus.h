@@ -37,5 +37,9 @@ void	ft_error(char *msg);
 char	*protects(char *get_line);
 char	*read_line(int fd, char *buffer, char *hold);
 char	*get_next_line(int fd);
+char	*line2(int *fd, char *line);
+void	aux2(int *fd, char *line, char *limiter);
+void	free_paths(char **paths);
+char	*clean_return(char *path, char **paths);
 
 #endif

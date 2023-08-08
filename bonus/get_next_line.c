@@ -6,7 +6,7 @@
 /*   By: micarrel <micarrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:02:06 by micarrel          #+#    #+#             */
-/*   Updated: 2023/05/15 18:13:07 by micarrel         ###   ########.fr       */
+/*   Updated: 2023/07/31 01:33:52 by micarrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,28 @@ char	*get_next_line(int fd)
 	}
 	hold = protects(get_line);
 	return (get_line);
+}
+
+char	*line2(int *fd, char *line)
+{
+	write(fd[1], line, ft_strlen(line));
+	free(line);
+	line = get_next_line(0);
+	return (line);
+}
+
+void	aux2(int *fd, char *line, char *limiter)
+{
+	while (line)
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		{
+			free(line);
+			close(fd[1]);
+			exit(0);
+		}
+		line = line2(fd, line);
+	}
+	close(fd[1]);
+	exit(1);
 }

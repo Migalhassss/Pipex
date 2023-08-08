@@ -30,21 +30,22 @@ char	*path_find(char *cmd, char **evnp)
 	char	*part_path;
 
 	i = 0;
+	if (access(cmd, F_OK) == 0)
+		return (cmd);
 	while (ft_strnstr(evnp[i], "PATH", 4) == 0)
 		i++;
 	path = ft_substr(evnp[i], 5, ft_strlen(evnp[i]));
 	paths = ft_split(path, ':');
 	free (path);
 	i = 0;
-	while (paths[i])
+	while (paths[++i])
 	{
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, cmd);
 		free(part_path);
 		if (access(path, F_OK) == 0)
-			return (path);
+			return (clean_return(path, paths));
 		free(path);
-		i++;
 	}
 	free_paths(paths);
 	return (0);
@@ -52,25 +53,22 @@ char	*path_find(char *cmd, char **evnp)
 
 void	execute(char *av, char **envp)
 {
-	int		i;
 	char	*path;
 	char	**cmd;
 
-	i = 0;
 	cmd = ft_split(av, ' ');
 	path = path_find(cmd[0], envp);
 	if (!path)
 	{
-		while (cmd[i])
-		{
-			free (cmd[i]);
-			i++;
-		}
-		free(cmd);
-		ft_error("Error path");
+		free_paths(cmd);
+		ft_error("Error command not found\n");
 	}
 	if (execve(path, cmd, envp) == -1)
+	{
+		free_paths(cmd);
+		free(path);
 		ft_error("Error to execute execve");
+	}
 }
 
 int	open_file(char *av, int i)
@@ -85,7 +83,7 @@ int	open_file(char *av, int i)
 	else if (i == 2)
 		file = open(av, O_RDONLY, 0777);
 	if (file == -1)
-		ft_error("Error opening file in main function\n");
+		ft_printf("Error opening file in main function\n");
 	return (file);
 }
 

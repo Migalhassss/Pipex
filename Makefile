@@ -1,4 +1,3 @@
-
 NAME		= pipex
 
 NAME_BONUS = pipexbonus
@@ -15,7 +14,7 @@ OBJS_BONUS	=	$(BONUSFILES:.c=.o)
 
 RM	= rm -f
 
-CC	= gcc
+CC	= cc
 
 CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=address
 
