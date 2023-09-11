@@ -59,7 +59,7 @@ To run `pipex`, you need to provide two input files and two commands. The genera
 - `cmd2`: Second command to be executed.
 - `file2`: Output file where the result of cmd2 will be written.
 
-  ## Example Usage
+## Example Usage
 
   Here's an example of how to use `pipex` to simulate a shell command pipeline that counts the number of lines in a text file using the `wc` command:
 
